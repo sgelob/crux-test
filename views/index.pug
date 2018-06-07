@@ -1,152 +1,54 @@
 extends layout
 
+include includes/mixins.pug
+
 block content
-  nav.navbar
-    a(class="button button-outline" href="/") See Desktop
-    a(class="button button-outline" href="/mobile") See Mobile
-
-  .section
+  .container
     h1.title= title
-    p.subtitle Powered by PageSpeed APIs
 
-    h2 Home Overall Scores
-    each value in valuesHome
-      p
-        span= value[1]
-        span &nbsp
-        span= value[0].body.ruleGroups.SPEED.score
+    input#toggle-tab-home(checked='', type='radio', name='tab')
+    input#toggle-tab-category(type='radio', name='tab')
+    input#toggle-tab-product(type='radio', name='tab')
 
-    hr
+    label(for='toggle-tab-home', class="button button-tab") Home
+    label(for='toggle-tab-category', class="button button-tab") Category
+    label(for='toggle-tab-product', class="button button-tab") Product
 
-    h2 Homepages FCP - First Paint
-    table.table
-      tbody
-        each value in valuesHome
-          tr
-            th
-              span= value[1]
-              span
-                | Fast
-            - fastVal = parseFloat((value[0].body.loadingExperience.metrics.FIRST_CONTENTFUL_PAINT_MS.distributions[0].proportion * 100)).toFixed(1)
-            td
-             span= fastVal
-             span %
-            th
-              span= value[1]
-              span
-                | Average
-            - avgVal = parseFloat((value[0].body.loadingExperience.metrics.FIRST_CONTENTFUL_PAINT_MS.distributions[1].proportion * 100)).toFixed(1)
-            td
-             span= avgVal
-             span %
-            th
-              span= value[1]
-              span
-                | Slow
-            - slowVal = parseFloat((value[0].body.loadingExperience.metrics.FIRST_CONTENTFUL_PAINT_MS.distributions[2].proportion * 100)).toFixed(1)
-            td
-             span= slowVal
-             span %
+    #tab-home.section.tab
+      h2
+        strong Home
 
-    h2 Homepages DCL - DOM Content Loaded
-    table.table
-      tbody
-        each value in valuesHome
-          tr
-            th
-              span= value[1]
-              span
-                | Fast
-            - fastVal = parseFloat((value[0].body.loadingExperience.metrics.DOM_CONTENT_LOADED_EVENT_FIRED_MS.distributions[0].proportion * 100)).toFixed(1)
-            td
-             span= fastVal
-             span %
-            th
-              span= value[1]
-              span
-                | Average
-            - avgVal = parseFloat((value[0].body.loadingExperience.metrics.DOM_CONTENT_LOADED_EVENT_FIRED_MS.distributions[1].proportion * 100)).toFixed(1)
-            td
-             span= avgVal
-             span %
-            th
-              span= value[1]
-              span
-                | Slow
-            - slowVal = parseFloat((value[0].body.loadingExperience.metrics.DOM_CONTENT_LOADED_EVENT_FIRED_MS.distributions[2].proportion * 100)).toFixed(1)
-            td
-             span= slowVal
-             span %
+      h3 Overall Scores
+      +overallScore(valuesHome)
 
-    hr
+      h3 FCP - First Paint
+      +table(valuesHome, 'fcp')
 
-    h2 Category Overall Scores
-    each value in valuesCategory
-      p
-        span= value[1]
-        span &nbsp
-        span= value[0].body.ruleGroups.SPEED.score
+      h3 DCL - DOM Content Loaded
+      +table(valuesHome, 'dcl')
 
-    hr
+    #tab-category.section.tab
+      h2
+        strong Category
 
-    h2 Categories FCP - First Paint
-    table.table
-      tbody
-        each value in valuesCategory
-          tr
-            th
-              span= value[1]
-              span
-                | Fast
-            - fastVal = parseFloat((value[0].body.loadingExperience.metrics.FIRST_CONTENTFUL_PAINT_MS.distributions[0].proportion * 100)).toFixed(1)
-            td
-             span= fastVal
-             span %
-            th
-              span= value[1]
-              span
-                | Average
-            - avgVal = parseFloat((value[0].body.loadingExperience.metrics.FIRST_CONTENTFUL_PAINT_MS.distributions[1].proportion * 100)).toFixed(1)
-            td
-             span= avgVal
-             span %
-            th
-              span= value[1]
-              span
-                | Slow
-            - slowVal = parseFloat((value[0].body.loadingExperience.metrics.FIRST_CONTENTFUL_PAINT_MS.distributions[2].proportion * 100)).toFixed(1)
-            td
-             span= slowVal
-             span %
+      h3 Overall Scores
+      +overallScore(valuesCategory)
 
-    h2 Categories DCL - DOM Content Loaded
-    table.table
-      tbody
-        each value in valuesCategory
-          tr
-            th
-              span= value[1]
-              span
-                | Fast
-            - fastVal = parseFloat((value[0].body.loadingExperience.metrics.DOM_CONTENT_LOADED_EVENT_FIRED_MS.distributions[0].proportion * 100)).toFixed(1)
-            td
-             span= fastVal
-             span %
-            th
-              span= value[1]
-              span
-                | Average
-            - avgVal = parseFloat((value[0].body.loadingExperience.metrics.DOM_CONTENT_LOADED_EVENT_FIRED_MS.distributions[1].proportion * 100)).toFixed(1)
-            td
-             span= avgVal
-             span %
-            th
-              span= value[1]
-              span
-                | Slow
-            - slowVal = parseFloat((value[0].body.loadingExperience.metrics.DOM_CONTENT_LOADED_EVENT_FIRED_MS.distributions[2].proportion * 100)).toFixed(1)
-            td
-             span= slowVal
-             span %
+      h3 FCP - First Paint
+      +table(valuesCategory, 'FIRST_CONTENTFUL_PAINT_MS')
 
-    hr
+      h3 DCL - DOM Content Loaded
+      +table(valuesCategory, 'DOM_CONTENT_LOADED_EVENT_FIRED_MS')
+
+    #tab-product.section.tab
+      h2
+        strong Product
+
+      h3 Overall Scores
+      +overallScore(valuesProduct)
+
+      h3 FCP - First Paint
+      +table(valuesProduct, 'FIRST_CONTENTFUL_PAINT_MS')
+
+      h3 DCL - DOM Content Loaded
+      +table(valuesProduct, 'DOM_CONTENT_LOADED_EVENT_FIRED_MS')

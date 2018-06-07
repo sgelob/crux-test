@@ -1,0 +1,49 @@
+mixin table(values, type)
+  table.table
+    tbody
+      each value in values
+        - fastValFcp = parseFloat((value[0].body.loadingExperience.metrics.FIRST_CONTENTFUL_PAINT_MS.distributions[0].proportion * 100)).toFixed(1)
+        - avgValFcp = parseFloat((value[0].body.loadingExperience.metrics.FIRST_CONTENTFUL_PAINT_MS.distributions[1].proportion * 100)).toFixed(1)
+        - slowValFcp = parseFloat((value[0].body.loadingExperience.metrics.FIRST_CONTENTFUL_PAINT_MS.distributions[2].proportion * 100)).toFixed(1)
+        - fastValDcl = parseFloat((value[0].body.loadingExperience.metrics.DOM_CONTENT_LOADED_EVENT_FIRED_MS.distributions[0].proportion * 100)).toFixed(1)
+        - avgValDcl = parseFloat((value[0].body.loadingExperience.metrics.DOM_CONTENT_LOADED_EVENT_FIRED_MS.distributions[1].proportion * 100)).toFixed(1)
+        - slowValDcl = parseFloat((value[0].body.loadingExperience.metrics.DOM_CONTENT_LOADED_EVENT_FIRED_MS.distributions[2].proportion * 100)).toFixed(1)
+        tr
+          th
+            span= value[1]
+            span
+              | Fast
+          td
+            if type === 'fcp'
+              span= fastValFcp
+            else
+              span= fastValDcl
+            span %
+          th
+            span= value[1]
+            span
+              | Average
+          td
+            if type === 'fcp'
+              span= avgValFcp
+            else
+              span= avgValDcl
+            span %
+          th
+            span= value[1]
+            span
+              | Slow
+          td
+            if type === 'fcp'
+              span= slowValFcp
+            else
+              span= slowValDcl
+            span %
+
+mixin overallScore (values)
+  table.table.table--overall
+    tbody
+      each value in values
+        tr
+          th= value[1]
+          td= value[0].body.ruleGroups.SPEED.score
