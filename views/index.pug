@@ -4,7 +4,7 @@ block content
   .section
     h1.title= title
     p.subtitle Powered by PageSpeed APIs
-    h2 Homepages
+    h2 Homepages FCP - First Pain
     table.table
       tbody
         each value in values
@@ -30,6 +30,36 @@ block content
               span 
                 | Slow
             - slowVal = parseFloat((value[0].body.loadingExperience.metrics.FIRST_CONTENTFUL_PAINT_MS.distributions[2].proportion * 100)).toFixed(1)
+            td 
+             span= slowVal
+             span %
+
+    h2 Homepages DCL - DOM Content Loaded 
+    table.table
+      tbody
+        each value in values
+          tr
+            th
+              span= value[1]
+              span 
+                | Fast 
+            - fastVal = parseFloat((value[0].body.loadingExperience.metrics.DOM_CONTENT_LOADED_EVENT_FIRED_MS.distributions[0].proportion * 100)).toFixed(1)
+            td 
+             span= fastVal
+             span %
+            th
+              span= value[1]
+              span 
+                | Average
+            - avgVal = parseFloat((value[0].body.loadingExperience.metrics.DOM_CONTENT_LOADED_EVENT_FIRED_MS.distributions[1].proportion * 100)).toFixed(1)
+            td 
+             span= avgVal
+             span %
+            th
+              span= value[1]
+              span 
+                | Slow
+            - slowVal = parseFloat((value[0].body.loadingExperience.metrics.DOM_CONTENT_LOADED_EVENT_FIRED_MS.distributions[2].proportion * 100)).toFixed(1)
             td 
              span= slowVal
              span %
