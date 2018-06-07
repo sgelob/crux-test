@@ -1,65 +1,152 @@
 extends layout
 
 block content
+  nav.navbar
+    a(class="button button-outline" href="/") See Desktop
+    a(class="button button-outline" href="/mobile") See Mobile
+
   .section
     h1.title= title
     p.subtitle Powered by PageSpeed APIs
+
+    h2 Home Overall Scores
+    each value in valuesHome
+      p
+        span= value[1]
+        span &nbsp
+        span= value[0].body.ruleGroups.SPEED.score
+
+    hr
+
     h2 Homepages FCP - First Paint
     table.table
       tbody
-        each value in values
+        each value in valuesHome
           tr
             th
               span= value[1]
-              span 
-                | Fast 
+              span
+                | Fast
             - fastVal = parseFloat((value[0].body.loadingExperience.metrics.FIRST_CONTENTFUL_PAINT_MS.distributions[0].proportion * 100)).toFixed(1)
-            td 
+            td
              span= fastVal
              span %
             th
               span= value[1]
-              span 
+              span
                 | Average
             - avgVal = parseFloat((value[0].body.loadingExperience.metrics.FIRST_CONTENTFUL_PAINT_MS.distributions[1].proportion * 100)).toFixed(1)
-            td 
+            td
              span= avgVal
              span %
             th
               span= value[1]
-              span 
+              span
                 | Slow
             - slowVal = parseFloat((value[0].body.loadingExperience.metrics.FIRST_CONTENTFUL_PAINT_MS.distributions[2].proportion * 100)).toFixed(1)
-            td 
+            td
              span= slowVal
              span %
 
-    h2 Homepages DCL - DOM Content Loaded 
+    h2 Homepages DCL - DOM Content Loaded
     table.table
       tbody
-        each value in values
+        each value in valuesHome
           tr
             th
               span= value[1]
-              span 
-                | Fast 
+              span
+                | Fast
             - fastVal = parseFloat((value[0].body.loadingExperience.metrics.DOM_CONTENT_LOADED_EVENT_FIRED_MS.distributions[0].proportion * 100)).toFixed(1)
-            td 
+            td
              span= fastVal
              span %
             th
               span= value[1]
-              span 
+              span
                 | Average
             - avgVal = parseFloat((value[0].body.loadingExperience.metrics.DOM_CONTENT_LOADED_EVENT_FIRED_MS.distributions[1].proportion * 100)).toFixed(1)
-            td 
+            td
              span= avgVal
              span %
             th
               span= value[1]
-              span 
+              span
                 | Slow
             - slowVal = parseFloat((value[0].body.loadingExperience.metrics.DOM_CONTENT_LOADED_EVENT_FIRED_MS.distributions[2].proportion * 100)).toFixed(1)
-            td 
+            td
              span= slowVal
              span %
+
+    hr
+
+    h2 Category Overall Scores
+    each value in valuesCategory
+      p
+        span= value[1]
+        span &nbsp
+        span= value[0].body.ruleGroups.SPEED.score
+
+    hr
+
+    h2 Categories FCP - First Paint
+    table.table
+      tbody
+        each value in valuesCategory
+          tr
+            th
+              span= value[1]
+              span
+                | Fast
+            - fastVal = parseFloat((value[0].body.loadingExperience.metrics.FIRST_CONTENTFUL_PAINT_MS.distributions[0].proportion * 100)).toFixed(1)
+            td
+             span= fastVal
+             span %
+            th
+              span= value[1]
+              span
+                | Average
+            - avgVal = parseFloat((value[0].body.loadingExperience.metrics.FIRST_CONTENTFUL_PAINT_MS.distributions[1].proportion * 100)).toFixed(1)
+            td
+             span= avgVal
+             span %
+            th
+              span= value[1]
+              span
+                | Slow
+            - slowVal = parseFloat((value[0].body.loadingExperience.metrics.FIRST_CONTENTFUL_PAINT_MS.distributions[2].proportion * 100)).toFixed(1)
+            td
+             span= slowVal
+             span %
+
+    h2 Categories DCL - DOM Content Loaded
+    table.table
+      tbody
+        each value in valuesCategory
+          tr
+            th
+              span= value[1]
+              span
+                | Fast
+            - fastVal = parseFloat((value[0].body.loadingExperience.metrics.DOM_CONTENT_LOADED_EVENT_FIRED_MS.distributions[0].proportion * 100)).toFixed(1)
+            td
+             span= fastVal
+             span %
+            th
+              span= value[1]
+              span
+                | Average
+            - avgVal = parseFloat((value[0].body.loadingExperience.metrics.DOM_CONTENT_LOADED_EVENT_FIRED_MS.distributions[1].proportion * 100)).toFixed(1)
+            td
+             span= avgVal
+             span %
+            th
+              span= value[1]
+              span
+                | Slow
+            - slowVal = parseFloat((value[0].body.loadingExperience.metrics.DOM_CONTENT_LOADED_EVENT_FIRED_MS.distributions[2].proportion * 100)).toFixed(1)
+            td
+             span= slowVal
+             span %
+
+    hr
