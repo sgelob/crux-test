@@ -28,41 +28,25 @@ var promiseRequest = function(url, strategy, label){
   .then(function(data) {
       return [data, label];
   });
-}
-
-var navabiHomeDesktopRequest = promiseRequest(navabiHomeURL, 'desktop', 'Navabi');
-var sheegoHomeDesktopRequest = promiseRequest(sheegoHomeURL, 'desktop', 'Sheego');
-var simplybeHomeDesktopRequest = promiseRequest(simplybeHomeURL, 'desktop', 'Simply Be');
-var zalandoHomeDesktopRequest = promiseRequest(zalandoHomeURL, 'desktop', 'Zalando');
-var ullaHomeDesktopRequest = promiseRequest(ullaHomeURL, 'desktop', 'Ulla');
-var navabiCategoryDesktopRequest = promiseRequest(navabiCategoryURL, 'desktop', 'Navabi');
-var sheegoCategoryDesktopRequest = promiseRequest(sheegoCategoryURL, 'desktop', 'Sheego');
-var simplybeCategoryDesktopRequest = promiseRequest(simplybeCategoryURL, 'desktop', 'Simply Be');
-var zalandoCategoryDesktopRequest = promiseRequest(zalandoCategoryURL, 'desktop', 'Zalando');
-var ullaCategoryDesktopRequest = promiseRequest(ullaCategoryURL, 'desktop', 'Ulla');
-var navabiProductDesktopRequest = promiseRequest(navabiProductURL, 'desktop', 'Navabi');
-var sheegoProductDesktopRequest = promiseRequest(sheegoProductURL, 'desktop', 'Sheego');
-var simplybeProductDesktopRequest = promiseRequest(simplybeProductURL, 'desktop', 'Simply Be');
-var zalandoProductDesktopRequest = promiseRequest(zalandoProductURL, 'desktop', 'Zalando');
-var ullaProductDesktopRequest = promiseRequest(ullaProductURL, 'desktop', 'Ulla');
-
-var navabiHomeMobileRequest = promiseRequest(navabiHomeURL, 'mobile', 'Navabi');
-var sheegoHomeMobileRequest = promiseRequest(sheegoHomeURL, 'mobile', 'Sheego');
-var simplybeHomeMobileRequest = promiseRequest(simplybeHomeURL, 'mobile', 'Simply Be');
-var zalandoHomeMobileRequest = promiseRequest(zalandoHomeURL, 'mobile', 'Zalando');
-var ullaHomeMobileRequest = promiseRequest(ullaHomeURL, 'mobile', 'Ulla');
-var navabiCategoryMobileRequest = promiseRequest(navabiCategoryURL, 'mobile', 'Navabi');
-var sheegoCategoryMobileRequest = promiseRequest(sheegoCategoryURL, 'mobile', 'Sheego');
-var simplybeCategoryMobileRequest = promiseRequest(simplybeCategoryURL, 'mobile', 'Simply Be');
-var zalandoCategoryMobileRequest = promiseRequest(zalandoCategoryURL, 'mobile', 'Zalando');
-var ullaCategoryMobileRequest = promiseRequest(ullaCategoryURL, 'mobile', 'Ulla');
-var navabiProductMobileRequest = promiseRequest(navabiProductURL, 'mobile', 'Navabi');
-var sheegoProductMobileRequest = promiseRequest(sheegoProductURL, 'mobile', 'Sheego');
-var simplybeProductMobileRequest = promiseRequest(simplybeProductURL, 'mobile', 'Simply Be');
-var zalandoProductMobileRequest = promiseRequest(zalandoProductURL, 'mobile', 'Zalando');
-var ullaProductMobileRequest = promiseRequest(ullaProductURL, 'mobile', 'Ulla');
+};
 
 router.get('/', function(req, res, next) {
+  var navabiHomeDesktopRequest = promiseRequest(navabiHomeURL, 'desktop', 'Navabi');
+  var sheegoHomeDesktopRequest = promiseRequest(sheegoHomeURL, 'desktop', 'Sheego');
+  var simplybeHomeDesktopRequest = promiseRequest(simplybeHomeURL, 'desktop', 'Simply Be');
+  var zalandoHomeDesktopRequest = promiseRequest(zalandoHomeURL, 'desktop', 'Zalando');
+  var ullaHomeDesktopRequest = promiseRequest(ullaHomeURL, 'desktop', 'Ulla');
+  var navabiCategoryDesktopRequest = promiseRequest(navabiCategoryURL, 'desktop', 'Navabi');
+  var sheegoCategoryDesktopRequest = promiseRequest(sheegoCategoryURL, 'desktop', 'Sheego');
+  var simplybeCategoryDesktopRequest = promiseRequest(simplybeCategoryURL, 'desktop', 'Simply Be');
+  var zalandoCategoryDesktopRequest = promiseRequest(zalandoCategoryURL, 'desktop', 'Zalando');
+  var ullaCategoryDesktopRequest = promiseRequest(ullaCategoryURL, 'desktop', 'Ulla');
+  var navabiProductDesktopRequest = promiseRequest(navabiProductURL, 'desktop', 'Navabi');
+  var sheegoProductDesktopRequest = promiseRequest(sheegoProductURL, 'desktop', 'Sheego');
+  var simplybeProductDesktopRequest = promiseRequest(simplybeProductURL, 'desktop', 'Simply Be');
+  var zalandoProductDesktopRequest = promiseRequest(zalandoProductURL, 'desktop', 'Zalando');
+  var ullaProductDesktopRequest = promiseRequest(ullaProductURL, 'desktop', 'Ulla');
+
   Promise.all([
       navabiHomeDesktopRequest,
       sheegoHomeDesktopRequest,
@@ -89,6 +73,22 @@ router.get('/', function(req, res, next) {
 
 /* GET home page. */
 router.get('/mobile', function(req, res, next) {
+  var navabiHomeMobileRequest = promiseRequest(navabiHomeURL, 'mobile', 'Navabi');
+  var sheegoHomeMobileRequest = promiseRequest(sheegoHomeURL, 'mobile', 'Sheego');
+  var simplybeHomeMobileRequest = promiseRequest(simplybeHomeURL, 'mobile', 'Simply Be');
+  var zalandoHomeMobileRequest = promiseRequest(zalandoHomeURL, 'mobile', 'Zalando');
+  var ullaHomeMobileRequest = promiseRequest(ullaHomeURL, 'mobile', 'Ulla');
+  var navabiCategoryMobileRequest = promiseRequest(navabiCategoryURL, 'mobile', 'Navabi');
+  var sheegoCategoryMobileRequest = promiseRequest(sheegoCategoryURL, 'mobile', 'Sheego');
+  var simplybeCategoryMobileRequest = promiseRequest(simplybeCategoryURL, 'mobile', 'Simply Be');
+  var zalandoCategoryMobileRequest = promiseRequest(zalandoCategoryURL, 'mobile', 'Zalando');
+  var ullaCategoryMobileRequest = promiseRequest(ullaCategoryURL, 'mobile', 'Ulla');
+  var navabiProductMobileRequest = promiseRequest(navabiProductURL, 'mobile', 'Navabi');
+  var sheegoProductMobileRequest = promiseRequest(sheegoProductURL, 'mobile', 'Sheego');
+  var simplybeProductMobileRequest = promiseRequest(simplybeProductURL, 'mobile', 'Simply Be');
+  var zalandoProductMobileRequest = promiseRequest(zalandoProductURL, 'mobile', 'Zalando');
+  var ullaProductMobileRequest = promiseRequest(ullaProductURL, 'mobile', 'Ulla');
+
   Promise.all([
       navabiHomeMobileRequest,
       sheegoHomeMobileRequest,
