@@ -72,8 +72,6 @@ router.get('/', function(req, res, next) {
         valuesHome: valuesHome, 
         valuesCategory: valuesCategory, 
         valuesProduct: valuesProduct 
-      }).catch(error => {
-        console.log(error);
       });
   });
 });
@@ -121,8 +119,6 @@ router.get('/mobile', function(req, res, next) {
         valuesHome: valuesHome, 
         valuesCategory: valuesCategory, 
         valuesProduct: valuesProduct 
-      }).catch(error => {
-        console.log(error);
       });
   });
 });
