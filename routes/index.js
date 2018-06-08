@@ -67,7 +67,14 @@ router.get('/', function(req, res, next) {
       var valuesHome = values.slice(0, 5);
       var valuesCategory = values.slice(5, 10);
       var valuesProduct = values.slice(10, 15);
-      res.render('index', { title: 'Google PageSpeed - Desktop', valuesHome: valuesHome, valuesCategory: valuesCategory, valuesProduct: valuesProduct });
+      res.render('index', { 
+        title: 'Google PageSpeed - Desktop', 
+        valuesHome: valuesHome, 
+        valuesCategory: valuesCategory, 
+        valuesProduct: valuesProduct 
+      }).catch(error => {
+        console.log(error);
+      });
   });
 });
 
@@ -109,7 +116,14 @@ router.get('/mobile', function(req, res, next) {
       var valuesHome = values.slice(0, 5);
       var valuesCategory = values.slice(5, 10);
       var valuesProduct = values.slice(10, 15);
-      res.render('index', { title: 'Google PageSpeed - Mobile', valuesHome: valuesHome, valuesCategory: valuesCategory, valuesProduct: valuesProduct });
+      res.render('index', { 
+        title: 'Google PageSpeed - Mobile', 
+        valuesHome: valuesHome, 
+        valuesCategory: valuesCategory, 
+        valuesProduct: valuesProduct 
+      }).catch(error => {
+        console.log(error);
+      });
   });
 });
 
