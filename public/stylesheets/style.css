@@ -3,9 +3,9 @@
 }
 
 .navbar {
-    display: flex;
-    justify-content: center;
-    margin: 20px auto;
+  display: flex;
+  justify-content: center;
+  margin: 20px auto;
 }
 
 .section {
@@ -13,8 +13,8 @@
   margin-top: 20px;
 }
 
-input[type="radio"]{
-	display:none;
+input[type="radio"] {
+  display: none;
 }
 
 .button-tab {
@@ -25,7 +25,7 @@ input[type="radio"]{
   margin-right: 4px;
 }
 
-.button-tab:hover{
+.button-tab:hover {
   opacity: 0.5;
 }
 
@@ -37,9 +37,7 @@ input[type="radio"]{
   transition: opacity 500ms ease;
 }
 
-#toggle-tab-home:checked ~ #tab-home,
-#toggle-tab-category:checked ~ #tab-category,
-#toggle-tab-product:checked ~ #tab-product {
+#toggle-tab-home:checked~#tab-home, #toggle-tab-category:checked~#tab-category, #toggle-tab-product:checked~#tab-product {
   visibility: visible;
   position: static;
   left: 0;

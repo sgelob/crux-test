@@ -1,119 +1,110 @@
-var express = require('express');
-var fs = require('fs');
-var request = require('superagent');
+var express = require("express");
+var fs = require("fs");
+var request = require("superagent");
 var router = express.Router();
 var APIKey;
 
-fs.readFile('./settings/api-key', 'utf8', function(err, data) {
+fs.readFile("./settings/api-key", "utf8", function(err, data) {
   if (err) {
     return console.log(err);
   }
   APIKey = data;
 });
 
-var homeUrls = require('../settings/home-urls.js');
-var categoryUrls = require('../settings/category-urls.js');
-var productUrls = require('../settings/product-urls.js');
+var siteNames = require("../settings/site-names.js");
+var homeUrls = require("../settings/home-urls.js");
+var categoryUrls = require("../settings/category-urls.js");
+var productUrls = require("../settings/product-urls.js");
 
-var promiseRequest = function(url, strategy, label){
+var promiseRequest = function(url, strategy, label) {
   return request
-  .get('https://www.googleapis.com/pagespeedonline/v4/runPagespeed?url=' + url + '&strategy=' + strategy + '&key=' + APIKey)
-  .set('Content-Type', 'application/json')
-  .then(function(data) {
+    .get("https://www.googleapis.com/pagespeedonline/v4/runPagespeed?url=" + url + "&strategy=" + strategy + "&key=" + APIKey)
+    .set("Content-Type", "application/json")
+    .then(function(data) {
       return [data, label];
-  });
+    });
 };
 
-router.get('/', function(req, res, next) {
-  var navabiHomeDesktopRequest = promiseRequest(homeUrls.first, 'desktop', 'Navabi');
-  var sheegoHomeDesktopRequest = promiseRequest(homeUrls.second, 'desktop', 'Sheego');
-  var simplybeHomeDesktopRequest = promiseRequest(homeUrls.third, 'desktop', 'Simply Be');
-  var zalandoHomeDesktopRequest = promiseRequest(homeUrls.fourth, 'desktop', 'Zalando');
-  var ullaHomeDesktopRequest = promiseRequest(homeUrls.fifth, 'desktop', 'Ulla');
-  var navabiCategoryDesktopRequest = promiseRequest(categoryUrls.first, 'desktop', 'Navabi');
-  var sheegoCategoryDesktopRequest = promiseRequest(categoryUrls.second, 'desktop', 'Sheego');
-  var simplybeCategoryDesktopRequest = promiseRequest(categoryUrls.third, 'desktop', 'Simply Be');
-  var zalandoCategoryDesktopRequest = promiseRequest(categoryUrls.fourth, 'desktop', 'Zalando');
-  var ullaCategoryDesktopRequest = promiseRequest(categoryUrls.fifth, 'desktop', 'Ulla');
-  var navabiProductDesktopRequest = promiseRequest(productUrls.first, 'desktop', 'Navabi');
-  var sheegoProductDesktopRequest = promiseRequest(productUrls.second, 'desktop', 'Sheego');
-  var simplybeProductDesktopRequest = promiseRequest(productUrls.third, 'desktop', 'Simply Be');
-  var zalandoProductDesktopRequest = promiseRequest(productUrls.fourth, 'desktop', 'Zalando');
-  var ullaProductDesktopRequest = promiseRequest(productUrls.fifth, 'desktop', 'Ulla');
+router.get("/", function(req, res, next) {
+  var d = "desktop";
+  var firstHomeDesktopRequest = promiseRequest(homeUrls.first, d, siteNames.first);
+  var secondHomeDesktopRequest = promiseRequest(homeUrls.second, d, siteNames.second);
+  var thirdHomeDesktopRequest = promiseRequest(homeUrls.third, d, siteNames.third);
+  var fourthHomeDesktopRequest = promiseRequest(homeUrls.fourth, d, siteNames.fourth);
+  var firstCategoryDesktopRequest = promiseRequest(categoryUrls.first, d, siteNames.first);
+  var secondCategoryDesktopRequest = promiseRequest(categoryUrls.second, d, siteNames.second);
+  var thirdCategoryDesktopRequest = promiseRequest(categoryUrls.third, d, siteNames.third);
+  var fourthCategoryDesktopRequest = promiseRequest(categoryUrls.fourth, d, siteNames.fourth);
+  var firstProductDesktopRequest = promiseRequest(productUrls.first, d, siteNames.first);
+  var secondProductDesktopRequest = promiseRequest(productUrls.second, d, siteNames.second);
+  var thirdProductDesktopRequest = promiseRequest(productUrls.third, d, siteNames.third);
+  var fourthProductDesktopRequest = promiseRequest(productUrls.fourth, d, siteNames.fourth);
 
   Promise.all([
-      navabiHomeDesktopRequest,
-      sheegoHomeDesktopRequest,
-      simplybeHomeDesktopRequest,
-      zalandoHomeDesktopRequest,
-      ullaHomeDesktopRequest,
-      navabiCategoryDesktopRequest,
-      sheegoCategoryDesktopRequest,
-      simplybeCategoryDesktopRequest,
-      zalandoCategoryDesktopRequest,
-      ullaCategoryDesktopRequest,
-      navabiProductDesktopRequest,
-      sheegoProductDesktopRequest,
-      simplybeProductDesktopRequest,
-      zalandoProductDesktopRequest,
-      ullaProductDesktopRequest
-    ]).then(function(values){
-      var valuesHome = values.slice(0, 5);
-      var valuesCategory = values.slice(5, 10);
-      var valuesProduct = values.slice(10, 15);
-      res.render('index', { 
-        title: 'Google PageSpeed - Desktop', 
-        valuesHome: valuesHome, 
-        valuesCategory: valuesCategory, 
-        valuesProduct: valuesProduct 
-      });
+    firstHomeDesktopRequest,
+    secondHomeDesktopRequest,
+    thirdHomeDesktopRequest,
+    fourthHomeDesktopRequest,
+    firstCategoryDesktopRequest,
+    secondCategoryDesktopRequest,
+    thirdCategoryDesktopRequest,
+    fourthCategoryDesktopRequest,
+    firstProductDesktopRequest,
+    secondProductDesktopRequest,
+    thirdProductDesktopRequest,
+    fourthProductDesktopRequest
+  ]).then(function(values) {
+    var valuesHome = values.slice(0, 4);
+    var valuesCategory = values.slice(4, 8);
+    var valuesProduct = values.slice(8, 12);
+    res.render("index", {
+      title: "Google PageSpeed - Desktop",
+      valuesHome: valuesHome,
+      valuesCategory: valuesCategory,
+      valuesProduct: valuesProduct
+    });
   });
 });
 
 /* GET home page. */
-router.get('/mobile', function(req, res, next) {
-  var navabiHomeMobileRequest = promiseRequest(homeUrls.first, 'desktop', 'Navabi');
-  var sheegoHomeMobileRequest = promiseRequest(homeUrls.second, 'desktop', 'Sheego');
-  var simplybeHomeMobileRequest = promiseRequest(homeUrls.third, 'desktop', 'Simply Be');
-  var zalandoHomeMobileRequest = promiseRequest(homeUrls.fourth, 'desktop', 'Zalando');
-  var ullaHomeMobileRequest = promiseRequest(homeUrls.fifth, 'desktop', 'Ulla');
-  var navabiCategoryMobileRequest = promiseRequest(categoryUrls.first, 'desktop', 'Navabi');
-  var sheegoCategoryMobileRequest = promiseRequest(categoryUrls.second, 'desktop', 'Sheego');
-  var simplybeCategoryMobileRequest = promiseRequest(categoryUrls.third, 'desktop', 'Simply Be');
-  var zalandoCategoryMobileRequest = promiseRequest(categoryUrls.fourth, 'desktop', 'Zalando');
-  var ullaCategoryMobileRequest = promiseRequest(categoryUrls.fifth, 'desktop', 'Ulla');
-  var navabiProductMobileRequest = promiseRequest(productUrls.first, 'desktop', 'Navabi');
-  var sheegoProductMobileRequest = promiseRequest(productUrls.second, 'desktop', 'Sheego');
-  var simplybeProductMobileRequest = promiseRequest(productUrls.third, 'desktop', 'Simply Be');
-  var zalandoProductMobileRequest = promiseRequest(productUrls.fourth, 'desktop', 'Zalando');
-  var ullaProductMobileRequest = promiseRequest(productUrls.fifth, 'desktop', 'Ulla');
+router.get("/mobile", function(req, res, next) {
+  var m = "mobile";
+  var firstHomeMobileRequest = promiseRequest(homeUrls.first, m, siteNames.first);
+  var secondHomeMobileRequest = promiseRequest(homeUrls.second, m, siteNames.second);
+  var thirdHomeMobileRequest = promiseRequest(homeUrls.third, m, siteNames.third);
+  var fourthHomeMobileRequest = promiseRequest(homeUrls.fourth, m, siteNames.fourth);
+  var firstCategoryMobileRequest = promiseRequest(categoryUrls.first, m, siteNames.first);
+  var secondCategoryMobileRequest = promiseRequest(categoryUrls.second, m, siteNames.second);
+  var thirdCategoryMobileRequest = promiseRequest(categoryUrls.third, m, siteNames.third);
+  var fourthCategoryMobileRequest = promiseRequest(categoryUrls.fourth, m, siteNames.fourth);
+  var firstProductMobileRequest = promiseRequest(productUrls.first, m, siteNames.first);
+  var secondProductMobileRequest = promiseRequest(productUrls.second, m, siteNames.second);
+  var thirdProductMobileRequest = promiseRequest(productUrls.third, m, siteNames.third);
+  var fourthProductMobileRequest = promiseRequest(productUrls.fourth, m, siteNames.fourth);
 
   Promise.all([
-      navabiHomeMobileRequest,
-      sheegoHomeMobileRequest,
-      simplybeHomeMobileRequest,
-      zalandoHomeMobileRequest,
-      ullaHomeMobileRequest,
-      navabiCategoryMobileRequest,
-      sheegoCategoryMobileRequest,
-      simplybeCategoryMobileRequest,
-      zalandoCategoryMobileRequest,
-      ullaCategoryMobileRequest,
-      navabiProductMobileRequest,
-      sheegoProductMobileRequest,
-      simplybeProductMobileRequest,
-      zalandoProductMobileRequest,
-      ullaProductMobileRequest
-    ]).then(function(values){
-      var valuesHome = values.slice(0, 5);
-      var valuesCategory = values.slice(5, 10);
-      var valuesProduct = values.slice(10, 15);
-      res.render('index', { 
-        title: 'Google PageSpeed - Mobile', 
-        valuesHome: valuesHome, 
-        valuesCategory: valuesCategory, 
-        valuesProduct: valuesProduct 
-      });
+    firstHomeMobileRequest,
+    secondHomeMobileRequest,
+    thirdHomeMobileRequest,
+    fourthHomeMobileRequest,
+    firstCategoryMobileRequest,
+    secondCategoryMobileRequest,
+    thirdCategoryMobileRequest,
+    fourthCategoryMobileRequest,
+    firstProductMobileRequest,
+    secondProductMobileRequest,
+    thirdProductMobileRequest,
+    fourthProductMobileRequest
+  ]).then(function(values) {
+    var valuesHome = values.slice(0, 4);
+    var valuesCategory = values.slice(4, 8);
+    var valuesProduct = values.slice(8, 12);
+    res.render("index", {
+      title: "Google PageSpeed - Mobile",
+      valuesHome: valuesHome,
+      valuesCategory: valuesCategory,
+      valuesProduct: valuesProduct
+    });
   });
 });
 
