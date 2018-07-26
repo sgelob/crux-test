@@ -25,7 +25,7 @@ var promiseRequest = function(url, strategy, label) {
     });
 };
 
-router.get("/", function(req, res, next) {
+router.get("/desktop", function(req, res, next) {
   var d = "desktop";
   var firstHomeDesktopRequest = promiseRequest(homeUrls.first, d, siteNames.first);
   var secondHomeDesktopRequest = promiseRequest(homeUrls.second, d, siteNames.second);
@@ -67,7 +67,7 @@ router.get("/", function(req, res, next) {
 });
 
 /* GET home page. */
-router.get("/mobile", function(req, res, next) {
+router.get("/", function(req, res, next) {
   var m = "mobile";
   var firstHomeMobileRequest = promiseRequest(homeUrls.first, m, siteNames.first);
   var secondHomeMobileRequest = promiseRequest(homeUrls.second, m, siteNames.second);
