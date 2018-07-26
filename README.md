@@ -1,3 +1,11 @@
+# Why
+
+Because web performance matters!
+
+# What
+
+Compare web performance metrics of your website against competiton, using the scores from PageSpeed Insights API. You can compare First Contentful Paint (FCP), DOM Content Loaded (DCL) and overral scores in percentage.
+
 # How to get this working
 
 - In the root of this project, create a "settings" folder
