@@ -7,3 +7,5 @@
 - Run "npm install" in your terminal
 - Run "npm run start" to start the server
 - Visit in your browser http://localhost:3333/
+
+If you have a different number of site to compare, you need to change the "values.slice" parameters inside the routes/index.js
