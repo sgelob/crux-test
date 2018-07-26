@@ -6,3 +6,4 @@
 - Install node on your machine if you don't have it already
 - Run "npm install" in your terminal
 - Run "npm run start" to start the server
+- Visit in your browser http://localhost:3333/
